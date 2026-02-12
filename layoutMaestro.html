@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Elite | Gestión Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="layoutMaestro.css">
+</head>
+<body>
+
+    <div id="auth-container">
+        <div class="auth-card">
+            <header class="auth-header">
+                <h1 class="serif-title">Hotel Elite</h1>
+                <p>Bienvenido al lujo y la comodidad</p>
+            </header>
+            
+            <form id="login-form" class="auth-form">
+                <h3>Iniciar Sesión</h3>
+                <div class="input-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="login-email" required placeholder="correo@elite.com">
+                </div>
+                <div class="input-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="login-password" required placeholder="••••••••">
+                </div>
+                <div class="input-group">
+                    <label>Rol</label>
+                    <select id="login-role" required>
+                        <option value="client">Cliente</option>
+                        <option value="admin">Administrador</option>
+                        <option value="operator">Operador</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Ingresar</button>
+                <p class="toggle-text">¿No tienes cuenta? <a href="#" id="go-to-register">Regístrate</a></p>
+            </form>
+
+            <form id="register-form" class="auth-form hidden">
+                <h3>Crear Cuenta</h3>
+                <div class="input-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" id="reg-name" required placeholder="Ej: Juan Valdés">
+                </div>
+                <div class="input-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="reg-email" required>
+                </div>
+                <div class="input-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="reg-password" required>
+                </div>
+                <div class="input-group">
+                    <label>Rol inicial</label>
+                    <select id="reg-role">
+                        <option value="client">Cliente</option>
+                        <option value="operator">Operador</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Registrarse</button>
+                <p class="toggle-text">¿Ya tienes cuenta? <a href="#" id="go-to-login">Inicia sesión</a></p>
+            </form>
+        </div>
+    </div>
+
+    <div id="app-container" class="hidden">
+        <aside id="sidebar-nav">
+            <div class="sidebar-header">
+                <h2 class="serif-title">Elite Panel</h2>
+                <span id="user-badge"></span>
+            </div>
+            <nav id="menu-items"></nav>
+        </aside>
+
+        <main id="main-content">
+            </main>
+    </div>
+
+    <script src="layoutMaestro.js"></script>
+</body>
+</html>
