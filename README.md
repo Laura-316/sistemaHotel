@@ -1,41 +1,26 @@
-# Sistema Hotel
+Sistema Hotel
+Cómo abrir este proyecto sin problemas
 
-## Cómo abrir este proyecto correctamente
+Si abres los archivos .html haciendo doble clic o directamente desde tu computadora (con rutas que empiezan con file://), es muy probable que el navegador bloquee algunos archivos y no funcione bien. Esto pasa por seguridad y se llama error de CORS.
 
-Para evitar problemas con la carga de scripts (errores de CORS), **no abras los archivos `.html` directamente haciendo doble clic o desde `file://`** en el navegador. Esto provoca que algunos navegadores bloqueen los recursos por razones de seguridad.
+¿Entonces, cómo lo abro bien?
 
-### ¿Cómo abrirlo bien?
+Lo mejor es usar un pequeño servidor que “sirva” los archivos para que el navegador los entienda bien y no bloquee nada.
 
-La forma recomendada es usar un servidor local, que sirve los archivos a través de `http://` y así el navegador permite cargar todos los scripts correctamente.
+Aquí te dejo dos formas súper fáciles para hacerlo:
 
-### Opciones fáciles para levantar un servidor local:
+Con Visual Studio Code
 
-1. **Usando Visual Studio Code**
+Instala la extensión llamada Live Server.
 
-   - Instala la extensión **Live Server**.
-   - Abre la carpeta del proyecto en VS Code.
-   - Haz clic derecho sobre el archivo `layoutMaestro.html` y selecciona **"Open with Live Server"**.
-   - El proyecto se abrirá en tu navegador con una URL como `http://127.0.0.1:5500/layoutMaestro.html`.
-   
-2. **Usando Python (si tienes instalado Python 3)**
+Abre la carpeta del proyecto en VS Code.
 
-   - Abre una terminal en la carpeta del proyecto.
-   - Ejecuta el comando:
+Haz clic derecho sobre el archivo layoutMaestro.html y elige "Open with Live Server".
 
-     ```
-     python -m http.server 5500
-     ```
+Se abrirá en tu navegador una dirección que empieza con http://127.0.0.1:5500/ y todo funcionará perfecto.
 
-   - Abre en tu navegador la URL:
+Con Python (si lo tienes instalado)
 
-     ```
-     http://localhost:5500/layoutMaestro.html
-     ```
+Abre la terminal o consola en la carpeta del proyecto.
 
----
-
-Si no sigues estos pasos y abres el HTML directamente, puedes encontrar errores que impiden cargar los scripts y el proyecto no funcionará correctamente.
-
----
-
-¡Disfruta trabajando en el Sistema Hotel!
+Ejecuta este comando:   python -m http.server 5500  Después, abre en tu navegador esta dirección:  http://localhost:5500/layoutMaestro.html
