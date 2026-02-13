@@ -1,0 +1,99 @@
+/* ==========================================================================
+   TABLAS ADMINISTRATIVAS Y BADGES – Adaptado a paleta 5★ corporativa elegante
+   ========================================================================== */
+
+/* Tabla principal (admin-table, logística, usuarios, etc.) */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+}
+
+/* Encabezados de tabla */
+.admin-table th {
+    background: rgba(201, 169, 110, 0.06);          /* dorado muy sutil y elegante */
+    color: var(--primary-gold);
+    padding: 1.3rem 1.4rem;
+    text-align: left;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.1px;
+    border-bottom: 1px solid rgba(201, 169, 110, 0.08);
+}
+
+/* Celdas de datos */
+.admin-table td {
+    padding: 1.2rem 1.4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    font-size: 0.92rem;
+    color: var(--text-light);
+}
+
+/* Hover en filas – efecto sutil y premium */
+.admin-table tr:hover {
+    background: rgba(201, 169, 110, 0.04);          /* hover dorado muy tenue */
+    transition: var(--transition);
+}
+
+/* Badges de estado (confirmada, pendiente, cancelada) */
+.status-badge {
+    padding: 0.4rem 0.9rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Estados específicos – tonos elegantes y corporativos */
+.status-badge.confirmada {
+    background: rgba(74, 156, 110, 0.15);           /* verde sofisticado */
+    color: #6acfa8;
+    border: 1px solid rgba(74, 156, 110, 0.3);
+}
+
+.status-badge.pendiente {
+    background: rgba(201, 169, 110, 0.12);          /* dorado como advertencia */
+    color: var(--primary-gold);
+    border: 1px solid rgba(201, 169, 110, 0.25);
+}
+
+.status-badge.cancelada {
+    background: rgba(201, 74, 74, 0.12);            /* rojo elegante y sobrio */
+    color: #e57373;
+    border: 1px solid rgba(201, 74, 74, 0.3);
+}
+
+/* Pills de rol (client, operator, etc.) */
+.rol-pill {
+    padding: 0.4rem 0.9rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Roles específicos – tonos corporativos premium */
+.rol-pill.client {
+    background: rgba(90, 158, 201, 0.12);           /* azul profundo y profesional */
+    color: var(--info);
+    border: 1px solid rgba(90, 158, 201, 0.3);
+}
+
+.rol-pill.operator {
+    background: rgba(74, 156, 110, 0.12);           /* verde sofisticado */
+    color: var(--success);
+    border: 1px solid rgba(74, 156, 110, 0.3);
+}
+
+/* Variante opcional: rol admin (si lo muestras en algún lugar) */
+.rol-pill.admin {
+    background: rgba(201, 169, 110, 0.15);          /* dorado para admin – autoridad y lujo */
+    color: var(--primary-gold);
+    border: 1px solid rgba(201, 169, 110, 0.35);
+}

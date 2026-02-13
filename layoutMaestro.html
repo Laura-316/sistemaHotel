@@ -3,85 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hotel Elite - Sistema de gestión premium para hoteles de lujo">
     <title>Hotel Elite | Gestión Premium</title>
+    
+    <!-- Fuentes Google -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="layoutMaestro.css">
+    
+    <!-- Estilos (en orden lógico) -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/filters.css">
+    <link rel="stylesheet" href="css/reserva.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
 
+    <!-- Pantalla de autenticación (login / registro) -->
     <div id="auth-container">
         <div class="auth-card">
             <header class="auth-header">
-                <h1 class="serif-title">Hotel Elite</h1>
+                <h1 class="serif-title">Elite</h1>
                 <p>Bienvenido al lujo y la comodidad</p>
             </header>
-            
+
+            <!-- Formulario de Inicio de Sesión -->
             <form id="login-form" class="auth-form">
                 <h3>Iniciar Sesión</h3>
+                
                 <div class="input-group">
-                    <label>Correo Electrónico</label>
-                    <input type="email" id="login-email" required placeholder="correo@elite.com">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" name="email" required autocomplete="email" placeholder="ejemplo@elite.com">
                 </div>
+
                 <div class="input-group">
-                    <label>Contraseña</label>
-                    <input type="password" id="login-password" required placeholder="••••••••">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="••••••••">
                 </div>
+
                 <div class="input-group">
-                    <label>Rol</label>
-                    <select id="login-role" required>
-                        <option value="client">Cliente</option>
-                        <option value="admin">Administrador</option>
-                        <option value="operator">Operador</option>
+                    <label for="role">Rol de Acceso</label>
+                    <select id="role" name="role" required aria-required="true">
+                        <option value="" disabled selected>Seleccione su rol</option>
+                        <option value="client">Cliente VIP</option>
+                        <option value="admin">Administrador General</option>
+                        <option value="operator">Operador de Logística</option>
                     </select>
                 </div>
-                <button type="submit" class="btn-primary">Ingresar</button>
-                <p class="toggle-text">¿No tienes cuenta? <a href="#" id="go-to-register">Regístrate</a></p>
+
+                <button type="submit" class="btn-primary">Ingresar al Panel</button>
+
+                <p class="toggle-text">
+                    ¿No tienes cuenta? 
+                    <a href="javascript:void(0)" id="go-to-register" aria-label="Ir al formulario de registro">Crea una cuenta aquí</a>
+                </p>
             </form>
 
+            <!-- Formulario de Registro (oculto por defecto) -->
             <form id="register-form" class="auth-form hidden">
-                <h3>Crear Cuenta</h3>
+                <h3>Crear Cuenta Nueva</h3>
+
                 <div class="input-group">
-                    <label>Nombre Completo</label>
-                    <input type="text" id="reg-name" required placeholder="Ej: Juan Valdés">
+                    <label for="reg-name">Nombre Completo</label>
+                    <input type="text" id="reg-name" name="name" required autocomplete="name" placeholder="Ej: Juan Valdés">
                 </div>
+
                 <div class="input-group">
-                    <label>Correo Electrónico</label>
-                    <input type="email" id="reg-email" required>
+                    <label for="reg-email">Correo Electrónico</label>
+                    <input type="email" id="reg-email" name="email" required autocomplete="email" placeholder="correo@ejemplo.com">
                 </div>
+
                 <div class="input-group">
-                    <label>Contraseña</label>
-                    <input type="password" id="reg-password" required>
+                    <label for="reg-password">Contraseña</label>
+                    <input type="password" id="reg-password" name="password" required autocomplete="new-password" placeholder="Mínimo 6 caracteres">
                 </div>
+
                 <div class="input-group">
-                    <label>Rol inicial</label>
-                    <select id="reg-role">
+                    <label for="reg-role">Tipo de Usuario</label>
+                    <select id="reg-role" name="role" required aria-required="true">
+                        <option value="" disabled selected>Seleccione tipo</option>
                         <option value="client">Cliente</option>
                         <option value="operator">Operador</option>
                     </select>
                 </div>
-                <button type="submit" class="btn-primary">Registrarse</button>
-                <p class="toggle-text">¿Ya tienes cuenta? <a href="#" id="go-to-login">Inicia sesión</a></p>
+
+                <button type="submit" class="btn-primary">Finalizar Registro</button>
+
+                <p class="toggle-text">
+                    ¿Ya tienes cuenta? 
+                    <a href="javascript:void(0)" id="go-to-login" aria-label="Volver al inicio de sesión">Regresar al inicio</a>
+                </p>
             </form>
         </div>
     </div>
 
+    <!-- Contenedor principal de la aplicación (oculto al inicio) -->
     <div id="app-container" class="hidden">
-        <aside id="sidebar-nav">
+        <aside id="sidebar-nav" aria-label="Navegación principal">
             <div class="sidebar-header">
                 <h2 class="serif-title">Elite Panel</h2>
-                <span id="user-badge"></span>
+                <!-- Badge del usuario: vacío, se llena dinámicamente desde JS -->
+                <span id="user-badge" style="font-size: 0.8rem; color: #d4af37; letter-spacing: 1px;"></span>
             </div>
-            <nav id="menu-items"></nav>
+
+            <nav id="menu-items" aria-label="Menú de navegación">
+                <!-- El menú se genera dinámicamente desde ui-core.js / cargarMenu() -->
+            </nav>
         </aside>
 
-        <main id="main-content">
-            </main>
+        <main id="main-content" aria-live="polite">
+            <!-- Aquí se renderizan todas las vistas dinámicamente -->
+        </main>
     </div>
 
-<script type="module" src="js/app.js"></script> <!--Punto de entrada y coordinación-->
-<script type="module" src="js/storage.js"></script><!--Manejo de localStorage-->
-<script type="module" src="js/logic.js"></script><!--Cálculos, filtros, reglas de negocio-->
-<script type="module" src="js/ui.js"></script><!--Todo lo que genera HTML y renderiza-->
-
+    <!-- Script principal (módulo ES) -->
+    <script type="module" src="js/app.js"></script>
 </body>
 </html>

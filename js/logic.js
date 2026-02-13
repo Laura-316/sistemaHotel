@@ -1,82 +1,73 @@
 /**
- * MÓDULO DE LÓGICA DE NEGOCIO - HOTEL ELITE
- * Maneja cálculos, filtrado de reservas y procesamiento de datos.
+ * LOGIC.JS - NÚCLEO DE NEGOCIO HOTEL ELITE (VERSIÓN 2026)
+ * Gestión de 3 habitaciones y cálculos financieros de estancia.
  */
 
 export const HotelLogic = {
+    // 1. DEFINICIÓN DE HABITACIONES Y TARIFAS (3 CATEGORÍAS)
+    habitaciones: {
+        'Sencilla Elite': 120000,
+        'Doble Luxury': 200000,
+        'Suite Imperial': 450000
+    },
 
     /**
-     * Calcula el costo total de una estancia.
-     * @param {string} fechaIn - Fecha de entrada (YYYY-MM-DD)
-     * @param {string} fechaOut - Fecha de salida (YYYY-MM-DD)
-     * @param {number} precioNoche - Precio según tipo de habitación
+     * Calcula la diferencia de días entre dos fechas.
      */
-    calcularTotal: (fechaIn, fechaOut, precioNoche) => {
-        const d1 = new Date(fechaIn);
-        const d2 = new Date(fechaOut);
-
-        // Validaciones iniciales de fecha
-        if (isNaN(d1) || isNaN(d2)) return { total: 0, noches: 0, error: null };
+    calcularNoches(entrada, salida) {
+        const f1 = new Date(entrada);
+        const f2 = new Date(salida);
         
-        if (d2 <= d1) {
-            return { total: 0, noches: 0, error: "La salida debe ser después del ingreso" };
+        if (isNaN(f1) || isNaN(f2) || f2 <= f1) return 1;
+
+        const diferenciaMilisegundos = Math.abs(f2 - f1);
+        const noches = Math.ceil(diferenciaMilisegundos / (1000 * 60 * 60 * 24));
+        
+        return noches;
+    },
+
+    /**
+     * Procesa y estructura la reserva con los cálculos de precio.
+     * ACTUALIZACIÓN: Ahora genera el array de fechas para el Mapa de Ocupación.
+     */
+    estructurarReserva(datos, user) {
+        const precioNoche = this.habitaciones[datos.tipoTexto] || 0;
+        const totalNoches = this.calcularNoches(datos.fechaIn, datos.fechaOut);
+        const montoTotal = totalNoches * precioNoche;
+
+        // --- NUEVA LÓGICA PARA EL MAPA DE OCUPACIÓN ---
+        const fechasOcupadas = [];
+        let fechaActual = new Date(datos.fechaIn + 'T12:00:00'); // Ajuste de zona horaria
+        const fechaFin = new Date(datos.fechaOut + 'T12:00:00');
+
+        while (fechaActual <= fechaFin) {
+            fechasOcupadas.push(fechaActual.toISOString().split('T')[0]);
+            fechaActual.setDate(fechaActual.getDate() + 1);
         }
-
-        const diferenciaMs = d2 - d1;
-        const noches = Math.floor(diferenciaMs / (1000 * 60 * 60 * 24));
-        const total = noches * precioNoche;
-
-        return { 
-            total, 
-            noches, 
-            totalTexto: `Total: $${total.toLocaleString()} COP (${noches} noches)`,
-            error: null 
-        };
-    },
-
-    /**
-     * Filtra la base de datos de reservas según texto y estado.
-     */
-    filtrarReservas: (reservas, query = "", status = "todos") => {
-        const q = query.toLowerCase();
-        return reservas.filter(r => {
-            const coincideTexto = r.userName.toLowerCase().includes(q) || 
-                                 r.tipo.toLowerCase().includes(q);
-            const coincideEstado = (status === "todos") || (r.estado === status);
-            return coincideTexto && coincideEstado;
-        });
-    },
-
-    /**
-     * Procesa las estadísticas financieras y de ocupación.
-     */
-    obtenerEstadisticas: (reservas) => {
-        const ingresosBrutos = reservas.reduce((acc, r) => {
-            // Limpieza de caracteres no numéricos para el cálculo
-            const valorNumerico = parseInt(r.total.replace(/\D/g, '')) || 0;
-            return acc + valorNumerico;
-        }, 0);
+        // ----------------------------------------------
 
         return {
-            ingresosBrutos,
-            totalReservas: reservas.length,
-            confirmadas: reservas.filter(r => r.estado === 'confirmada').length
+            id: `RES-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+            userEmail: user.email,
+            userName: user.name,
+            tipo: datos.tipoTexto,
+            precioUnitario: precioNoche,
+            noches: totalNoches,
+            total: montoTotal,
+            fechaIngreso: datos.fechaIn,
+            fechaSalida: datos.fechaOut,
+            // Guardamos el array para que el Mapa de Ocupación funcione:
+            fechas: fechasOcupadas, 
+            // Guardamos el string para que las tablas no se rompan:
+            rangoTexto: `${datos.fechaIn} al ${datos.fechaOut}`, 
+            hora: datos.hora,
+            estado: 'pendiente',
+            creadoEn: new Date().toISOString()
         };
     },
 
-    /**
-     * Valida y formatea el objeto de reserva antes de guardarlo.
-     */
-    estructurarReserva: (formData, user, esEdicion, reservaPrevia = null) => {
-        return {
-            id: esEdicion ? reservaPrevia.id : Date.now(),
-            userEmail: esEdicion ? reservaPrevia.userEmail : user.email,
-            userName: esEdicion ? reservaPrevia.userName : user.name,
-            tipo: formData.tipoTexto,
-            fechas: `${formData.fechaIn} a ${formData.fechaOut}`,
-            hora: formData.hora,
-            total: formData.totalTexto,
-            estado: esEdicion ? reservaPrevia.estado : "pendiente"
-        };
+    filtrarPorEstado(reservas, estado) {
+        if (estado === 'todos') return reservas;
+        return reservas.filter(r => r.estado === estado);
     }
 };

@@ -1,0 +1,90 @@
+/* ==========================================================================
+   LAYOUT PRINCIPAL (SIDEBAR + CONTENIDO) – Adaptado a paleta 5★ corporativa
+   ========================================================================== */
+
+#app-container {
+    display: flex;
+    height: 100vh;
+    background: var(--dark-bg);
+}
+
+/* Sidebar lateral – navegación principal */
+#sidebar-nav {
+    width: 280px;
+    min-width: 280px;
+    background: var(--panel-bg);                    /* fondo sutilmente más claro que el principal */
+    border-right: 1px solid rgba(201, 169, 110, 0.08); /* borde dorado muy tenue */
+    padding: 2.2rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    backdrop-filter: blur(4px);                     /* toque premium y moderno */
+}
+
+/* Encabezado del sidebar (logo + badge usuario) */
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 2.8rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(201, 169, 110, 0.06);
+}
+
+.sidebar-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.6rem;
+    color: var(--primary-gold);
+    letter-spacing: 1.5px;
+}
+
+/* Badge del usuario logueado */
+#user-badge {
+    display: inline-block;
+    margin-top: 0.8rem;
+    padding: 0.4rem 1.1rem;
+    background: rgba(201, 169, 110, 0.08);          /* dorado muy sutil */
+    color: var(--accent-gold);
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(201, 169, 110, 0.15);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.1px;
+}
+
+/* Contenedor del menú */
+#menu-items {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+/* Enlaces del menú lateral */
+.nav-link {
+    display: block;
+    padding: 1rem 1.3rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    font-size: 0.96rem;
+    font-weight: 500;
+    transition: var(--transition);
+    letter-spacing: 0.5px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: rgba(201, 169, 110, 0.07);          /* hover dorado muy suave */
+    color: var(--accent-gold);
+    padding-left: 1.6rem;
+    box-shadow: inset 0 0 10px rgba(201, 169, 110, 0.05);
+}
+
+/* Área principal de contenido */
+#main-content {
+    flex: 1;
+    padding: 2.8rem 3rem;
+    overflow-y: auto;
+    background: var(--dark-bg);
+    color: var(--text-light);
+}
