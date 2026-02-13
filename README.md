@@ -17,10 +17,17 @@ Abre la carpeta del proyecto en VS Code.
 
 Haz clic derecho sobre el archivo layoutMaestro.html y elige "Open with Live Server".
 
-Se abrirá en tu navegador una dirección que empieza con http://127.0.0.1:5500/ y todo funcionará perfecto.
+Se abrirá en tu navegador una dirección que empieza con http://127.0.0.1:5500/
+ y todo funcionará perfecto.
 
 Con Python (si lo tienes instalado)
 
 Abre la terminal o consola en la carpeta del proyecto.
 
-Ejecuta este comando:   python -m http.server 5500  Después, abre en tu navegador esta dirección:  http://localhost:5500/layoutMaestro.html
+Ejecuta este comando: python -m http.server 5500
+
+Después, abre en tu navegador esta dirección: http://localhost:5500/layoutMaestro.html
+
+Si abres el archivo sin usar servidor (con doble clic), puede que veas que no carga los scripts o funciones y el proyecto no funcione como debe.
+
+¡Listo! Así evitas problemas y puedes disfrutar trabajando con el Sistema Hotel sin dolores de cabeza 😊
